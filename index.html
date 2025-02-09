@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoSlim | Mobile Accessories Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide {
+            animation: slide 20s linear infinite;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-blue-600 p-4">
+        <div class="container mx-auto">
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <img src="https://i.ibb.co/VvxBzzg/Co-Slim.png" alt="CoSlim Logo" class="h-8">
+                    <span class="text-white text-2xl font-bold">CoSlim</span>
+                </a>
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <div class="relative">
+                            <input type="text" id="searchInput" 
+                                   class="w-64 px-4 py-2 rounded-lg pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                   placeholder="Search phones...">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+                    <button id="cartBtn" class="text-white">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cartCount" class="bg-red-500 text-white rounded-full px-2">0</span>
+                    </button>
+                    <button id="loginBtn" class="text-white">Login</button>
+                    <button onclick="app.showAdminLogin()" 
+                            class="text-white flex items-center space-x-1 ml-4">
+                        <i class="fas fa-user-shield"></i>
+                        <span>Admin Panel</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="md:hidden">
+                <div class="flex justify-between items-center">
+                    <a href="#" class="flex items-center space-x-2">
+                        <img src="https://i.ibb.co/VvxBzzg/Co-Slim.png" alt="CoSlim Logo" class="h-6">
+                        <span class="text-white text-xl font-bold">CoSlim</span>
+                    </a>
+                    <button id="mobileMenuBtn" class="text-white">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu (Hidden by default) -->
+                <div id="mobileMenu" class="hidden mt-4 space-y-4">
+                    <div class="relative">
+                        <input type="text" id="mobileSearchInput" 
+                               class="w-full px-4 py-2 rounded-lg pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                               placeholder="Search phones...">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    </div>
+                    <div class="flex justify-between">
+                        <button id="mobileCartBtn" class="text-white flex items-center">
+                            <i class="fas fa-shopping-cart mr-2"></i>
+                            Cart
+                            <span id="mobileCartCount" class="bg-red-500 text-white rounded-full px-2 ml-2">0</span>
+                        </button>
+                        <button id="mobileLoginBtn" class="text-white flex items-center">
+                            <i class="fas fa-user mr-2"></i>
+                            Login
+                        </button>
+                    </div>
+                    <button onclick="app.showAdminLogin()" 
+                            class="text-white flex items-center">
+                        <i class="fas fa-user-shield mr-2"></i>
+                        Admin Panel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="mainContent" class="container mx-auto mt-8 min-h-[60vh]">
+        <!-- Content will be dynamically loaded here -->
+    </main>
+
+    <!-- Modal Container -->
+    <div id="modalContainer" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <!-- Modal content will be dynamically loaded here -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 mt-16">
+        <!-- Main Footer -->
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-2">
+                        <img src="https://i.ibb.co/VvxBzzg/Co-Slim.png" alt="CoSlim Logo" class="h-8 invert">
+                        <span class="text-xl font-bold text-white">CoSlim</span>
+                    </div>
+                    <p class="text-sm">Your one-stop shop for premium mobile accessories. Protect your device with style.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition">Products</a></li>
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" onclick="app.showOrderTracking(); return false;" class="hover:text-white transition">Track Order</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Return Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Contact Us</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start space-x-2">
+                            <i class="fas fa-map-marker-alt mt-1"></i>
+                            <span>123 Main Street, City, State, 12345</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone"></i>
+                            <span>+1 234 567 8900</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope"></i>
+                            <span>support@coslim.com</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Methods & Bottom Bar -->
+        <div class="border-t border-gray-800">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                    <!-- Copyright -->
+                    <div class="text-sm">
+                        © 2024 CoSlim. All rights reserved.
+                    </div>
+
+                    <!-- Payment Methods -->
+                    <div class="flex space-x-4">
+                        <img src="https://i.ibb.co/1rhRZnx/visa.png" alt="Visa" class="h-8">
+                        <img src="https://i.ibb.co/vxz1hRq/mastercard.png" alt="Mastercard" class="h-8">
+                        <img src="https://i.ibb.co/WVkDyCG/paypal.png" alt="PayPal" class="h-8">
+                        <img src="https://i.ibb.co/PxkYDXL/upi.png" alt="UPI" class="h-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html> 
